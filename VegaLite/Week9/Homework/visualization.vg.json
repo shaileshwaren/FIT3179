@@ -165,7 +165,7 @@
       "fill": "color",
       "gradientLength": {"signal": "clamp(height, 64, 200)"},
       "labelOverlap": "greedy",
-      "title": "life_expectancy_at_birth"
+      "title": "Life Expectancy at Birth (years)"
     }
   ],
   "config": {}
