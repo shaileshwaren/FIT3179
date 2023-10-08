@@ -1,0 +1,424 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "background": "white",
+  "padding": 5,
+  "width": 800,
+  "data": [
+    {
+      "name": "source_1",
+      "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/VegaLite/Week9/Homework/oceans.topojson",
+      "format": {"type": "topojson", "feature": "oceans"}
+    },
+    {
+      "name": "source_2",
+      "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/VegaLite/Week9/Homework/WorldMapWithGraticules.topojson",
+      "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+    },
+    {
+      "name": "source_3",
+      "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/VegaLite/Week9/Homework/life_expectancy_and_population_2020.csv",
+      "format": {"type": "csv", "delimiter": ","}
+    },
+    {
+      "name": "source_0",
+      "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/VegaLite/Week9/Homework/ne_110m_admin_0_countries.topojson",
+      "format": {
+        "type": "topojson",
+        "feature": "ne_110m_admin_0_countries",
+        "parse": {}
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum[\"properties\"] && datum[\"properties\"][\"NAME\"]",
+          "as": "properties.NAME"
+        }
+      ]
+    },
+    {
+      "name": "data_0",
+      "source": "source_0",
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "'Data is not available in ' + datum.properties.NAME",
+          "as": "note"
+        }
+      ]
+    },
+    {
+      "name": "data_1",
+      "source": "source_0",
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "source_3",
+          "key": "iso3",
+          "fields": ["properties.ISO_A3"],
+          "values": ["life_expectancy_at_birth"]
+        },
+        {
+          "type": "filter",
+          "expr": "isValid(datum[\"life_expectancy_at_birth\"]) && isFinite(+datum[\"life_expectancy_at_birth\"])"
+        }
+      ]
+    },
+    {
+      "name": "data_2",
+      "source": "source_3",
+      "transform": [
+        {"type": "filter", "expr": "datum.pop_density > 0"},
+        {"type": "filter", "expr": "datum.population > population_above"},
+        {
+          "type": "filter",
+          "expr": "continent_selection == null || datum.continent == continent_selection"
+        }
+      ]
+    },
+    {
+      "name": "data_3",
+      "source": "data_2",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "isValid(datum[\"pop_density\"]) && isFinite(+datum[\"pop_density\"]) && isValid(datum[\"life_expectancy_at_birth\"]) && isFinite(+datum[\"life_expectancy_at_birth\"]) && isValid(datum[\"population\"]) && isFinite(+datum[\"population\"])"
+        }
+      ]
+    },
+    {
+      "name": "data_4",
+      "source": "data_2",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "isValid(datum[\"pop_density\"]) && isFinite(+datum[\"pop_density\"]) && isValid(datum[\"life_expectancy_at_birth\"]) && isFinite(+datum[\"life_expectancy_at_birth\"])"
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "projection",
+      "size": {"signal": "[width, childHeight]"},
+      "fit": {
+        "signal": "[data('data_0'), data('source_1'), data('source_2'), data('data_1')]"
+      },
+      "type": "equalEarth"
+    }
+  ],
+  "signals": [
+    {"name": "childHeight", "value": 400},
+    {
+      "name": "population_above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 100000000,
+        "step": 1000000,
+        "name": "Minimum Population: "
+      }
+    },
+    {
+      "name": "continent_selection",
+      "bind": {
+        "input": "select",
+        "options": [null, "America", "Europe", "Africa", "Asia", "Oceania"],
+        "labels": [
+          "Show All",
+          "America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "name": "Continent Selection: "
+      }
+    }
+  ],
+  "layout": {"padding": 20, "columns": 1, "bounds": "full", "align": "each"},
+  "marks": [
+    {
+      "type": "group",
+      "name": "concat_0_group",
+      "title": {"text": "Life Expectancy at Birth (2020)", "frame": "group"},
+      "style": "view",
+      "encode": {
+        "update": {
+          "width": {"signal": "width"},
+          "height": {"signal": "childHeight"}
+        }
+      },
+      "marks": [
+        {
+          "name": "concat_0_layer_0_marks",
+          "type": "shape",
+          "style": ["geoshape"],
+          "from": {"data": "data_0"},
+          "encode": {
+            "update": {
+              "fill": {"value": "#bdbdbd"},
+              "stroke": {"value": "black"},
+              "strokeWidth": {"value": 0.2},
+              "tooltip": {
+                "signal": "isValid(datum[\"note\"]) ? datum[\"note\"] : \"\"+datum[\"note\"]"
+              },
+              "ariaRoleDescription": {"value": "geoshape"},
+              "description": {
+                "signal": "\"note: \" + (isValid(datum[\"note\"]) ? datum[\"note\"] : \"\"+datum[\"note\"])"
+              }
+            }
+          },
+          "transform": [{"type": "geoshape", "projection": "projection"}]
+        },
+        {
+          "name": "concat_0_layer_1_marks",
+          "type": "shape",
+          "style": ["geoshape"],
+          "from": {"data": "source_1"},
+          "encode": {
+            "update": {
+              "fill": {"value": "#9ecae1"},
+              "stroke": {"value": "black"},
+              "strokeWidth": {"value": 0.2},
+              "ariaRoleDescription": {"value": "geoshape"}
+            }
+          },
+          "transform": [{"type": "geoshape", "projection": "projection"}]
+        },
+        {
+          "name": "concat_0_layer_2_marks",
+          "type": "shape",
+          "style": ["geoshape"],
+          "from": {"data": "source_2"},
+          "encode": {
+            "update": {
+              "fill": {"value": null},
+              "stroke": {"value": "white"},
+              "strokeWidth": {"value": 0.5},
+              "ariaRoleDescription": {"value": "geoshape"}
+            }
+          },
+          "transform": [{"type": "geoshape", "projection": "projection"}]
+        },
+        {
+          "name": "concat_0_layer_3_marks",
+          "type": "shape",
+          "style": ["geoshape"],
+          "from": {"data": "data_1"},
+          "encode": {
+            "update": {
+              "stroke": {"value": "black"},
+              "strokeWidth": {"value": 0.2},
+              "fill": {
+                "scale": "concat_0_color",
+                "field": "life_expectancy_at_birth"
+              },
+              "tooltip": {
+                "signal": "{\"Country\": isValid(datum[\"properties.NAME\"]) ? datum[\"properties.NAME\"] : \"\"+datum[\"properties.NAME\"], \"Life Expectancy at Birth (years)\": format(datum[\"life_expectancy_at_birth\"], \".2f\")}"
+              },
+              "ariaRoleDescription": {"value": "geoshape"},
+              "description": {
+                "signal": "\"life_expectancy_at_birth: \" + (format(datum[\"life_expectancy_at_birth\"], \"\")) + \"; Country: \" + (isValid(datum[\"properties.NAME\"]) ? datum[\"properties.NAME\"] : \"\"+datum[\"properties.NAME\"]) + \"; Life Expectancy at Birth (years): \" + (format(datum[\"life_expectancy_at_birth\"], \".2f\"))"
+              }
+            }
+          },
+          "transform": [{"type": "geoshape", "projection": "projection"}]
+        }
+      ],
+      "legends": [
+        {
+          "fill": "concat_0_color",
+          "gradientLength": {"signal": "clamp(childHeight, 64, 200)"},
+          "labelOverlap": "greedy",
+          "title": "life_expectancy_at_birth"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "name": "concat_1_group",
+      "title": {
+        "text": "Life Expectancy at Birth by Population Density",
+        "frame": "group"
+      },
+      "style": "cell",
+      "encode": {
+        "update": {
+          "width": {"signal": "width"},
+          "height": {"signal": "childHeight"}
+        }
+      },
+      "marks": [
+        {
+          "name": "concat_1_layer_0_marks",
+          "type": "symbol",
+          "style": ["circle"],
+          "from": {"data": "data_3"},
+          "encode": {
+            "update": {
+              "opacity": {"value": 0.6},
+              "fill": {"scale": "concat_1_color", "field": "continent"},
+              "tooltip": {
+                "signal": "{\"country\": isValid(datum[\"country\"]) ? datum[\"country\"] : \"\"+datum[\"country\"], \"continent\": isValid(datum[\"continent\"]) ? datum[\"continent\"] : \"\"+datum[\"continent\"], \"life_expectancy_from_birth\": format(datum[\"life_expectancy_from_birth\"], \".2f\"), \"population\": format(datum[\"population\"], \",\"), \"pop_density\": format(datum[\"pop_density\"], \".2f\")}"
+              },
+              "ariaRoleDescription": {"value": "circle"},
+              "description": {
+                "signal": "\"Population Density (per km²): \" + (format(datum[\"pop_density\"], \"\")) + \"; Life Expectancy (yrs): \" + (format(datum[\"life_expectancy_at_birth\"], \"\")) + \"; continent: \" + (isValid(datum[\"continent\"]) ? datum[\"continent\"] : \"\"+datum[\"continent\"]) + \"; population: \" + (format(datum[\"population\"], \".1s\")) + \"; country: \" + (isValid(datum[\"country\"]) ? datum[\"country\"] : \"\"+datum[\"country\"]) + \"; life_expectancy_from_birth: \" + (format(datum[\"life_expectancy_from_birth\"], \".2f\")) + \"; pop_density: \" + (format(datum[\"pop_density\"], \".2f\"))"
+              },
+              "x": {"scale": "concat_1_x", "field": "pop_density"},
+              "y": {"scale": "concat_1_y", "field": "life_expectancy_at_birth"},
+              "size": {"scale": "size", "field": "population"},
+              "shape": {"value": "circle"}
+            }
+          }
+        },
+        {
+          "name": "concat_1_layer_1_marks",
+          "type": "text",
+          "style": ["text"],
+          "from": {"data": "data_4"},
+          "encode": {
+            "update": {
+              "align": {"value": "right"},
+              "baseline": {"value": "middle"},
+              "dx": {"value": -12},
+              "fontSize": {"value": 11.5},
+              "fontStyle": {"value": "italic"},
+              "fill": {"value": "black"},
+              "opacity": [
+                {
+                  "test": "datum['country'] == 'China' || datum['country'] == 'Singapore' || datum['country'] == 'Australia' || datum['country'] == 'New Zealand' || datum['country'] == 'Italy' || datum['country'] == 'Yemen' ||  datum['country'] == 'United States'",
+                  "value": 1
+                },
+                {"value": 0}
+              ],
+              "tooltip": {
+                "signal": "{\"country\": isValid(datum[\"country\"]) ? datum[\"country\"] : \"\"+datum[\"country\"], \"continent\": isValid(datum[\"continent\"]) ? datum[\"continent\"] : \"\"+datum[\"continent\"], \"life_expectancy_at_birth\": format(datum[\"life_expectancy_at_birth\"], \".2f\"), \"population\": format(datum[\"population\"], \",\"), \"pop_density\": format(datum[\"pop_density\"], \".2f\")}"
+              },
+              "description": {
+                "signal": "\"Population Density (per km²): \" + (format(datum[\"pop_density\"], \"\")) + \"; Life Expectancy (yrs): \" + (format(datum[\"life_expectancy_at_birth\"], \"\")) + \"; country: \" + (isValid(datum[\"country\"]) ? datum[\"country\"] : \"\"+datum[\"country\"]) + \"; continent: \" + (isValid(datum[\"continent\"]) ? datum[\"continent\"] : \"\"+datum[\"continent\"]) + \"; life_expectancy_at_birth: \" + (format(datum[\"life_expectancy_at_birth\"], \".2f\")) + \"; population: \" + (format(datum[\"population\"], \",\")) + \"; pop_density: \" + (format(datum[\"pop_density\"], \".2f\"))"
+              },
+              "x": {"scale": "concat_1_x", "field": "pop_density"},
+              "y": {"scale": "concat_1_y", "field": "life_expectancy_at_birth"},
+              "text": {
+                "signal": "isValid(datum[\"country\"]) ? datum[\"country\"] : \"\"+datum[\"country\"]"
+              }
+            }
+          }
+        }
+      ],
+      "axes": [
+        {
+          "scale": "concat_1_x",
+          "orient": "bottom",
+          "tickCount": 5,
+          "gridScale": "concat_1_y",
+          "grid": true,
+          "domain": false,
+          "labels": false,
+          "aria": false,
+          "maxExtent": 0,
+          "minExtent": 0,
+          "ticks": false,
+          "zindex": 0
+        },
+        {
+          "scale": "concat_1_y",
+          "orient": "left",
+          "tickCount": 5,
+          "gridScale": "concat_1_x",
+          "grid": true,
+          "domain": false,
+          "labels": false,
+          "aria": false,
+          "maxExtent": 0,
+          "minExtent": 0,
+          "ticks": false,
+          "zindex": 0
+        },
+        {
+          "scale": "concat_1_x",
+          "orient": "bottom",
+          "grid": false,
+          "title": "Population Density (per km²)",
+          "tickCount": 5,
+          "labelFlush": true,
+          "labelOverlap": "greedy",
+          "zindex": 0
+        },
+        {
+          "scale": "concat_1_y",
+          "orient": "left",
+          "grid": false,
+          "title": "Life Expectancy (yrs)",
+          "tickCount": 5,
+          "labelOverlap": true,
+          "zindex": 0
+        }
+      ],
+      "legends": [
+        {
+          "fill": "concat_1_color",
+          "symbolType": "circle",
+          "title": "continent",
+          "encode": {"symbols": {"update": {"opacity": {"value": 0.6}}}}
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "size",
+      "type": "threshold",
+      "domain": [100000, 1000000, 10000000, 100000000, 1000000000],
+      "range": [10, 50, 150, 200, 300, 400]
+    },
+    {
+      "name": "concat_0_color",
+      "type": "log",
+      "domain": {"data": "data_1", "field": "life_expectancy_at_birth"},
+      "range": ["#e5f5e0", "#a1d99b", "#31a354"],
+      "interpolate": "hcl"
+    },
+    {
+      "name": "concat_1_x",
+      "type": "log",
+      "domain": [1, 100000],
+      "range": [0, {"signal": "width"}]
+    },
+    {
+      "name": "concat_1_y",
+      "type": "linear",
+      "domain": [0, 90],
+      "range": [{"signal": "childHeight"}, 0],
+      "zero": true
+    },
+    {
+      "name": "concat_1_color",
+      "type": "ordinal",
+      "domain": ["America", "Europe", "Africa", "Asia", "Oceania"],
+      "range": ["#984ea3", "#ff7f00", "#a6cee3", "#377eb8", "#a65628"]
+    }
+  ],
+  "legends": [
+    {
+      "format": ".1s",
+      "size": "size",
+      "labelOverlap": "greedy",
+      "symbolType": "circle",
+      "title": "population",
+      "encode": {
+        "symbols": {
+          "update": {
+            "fill": {"value": "black"},
+            "fillOpacity": {"value": 0.6},
+            "opacity": {"value": 0.6},
+            "stroke": {"value": "transparent"}
+          }
+        }
+      }
+    }
+  ],
+  "config": {}
+}
