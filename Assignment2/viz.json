@@ -1,0 +1,173 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "background": "white",
+  "padding": 5,
+  "width": 800,
+  "height": 400,
+  "title": {"text": "Life Expectancy by Country", "frame": "group"},
+  "style": "view",
+  "data": [
+    {
+      "name": "source_1",
+      "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/VegaLite/Week9/Homework/oceans.topojson",
+      "format": {"type": "topojson", "feature": "oceans"}
+    },
+    {
+      "name": "source_2",
+      "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/VegaLite/Week9/Homework/WorldMapWithGraticules.topojson",
+      "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+    },
+    {
+      "name": "source_3",
+      "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/Assignment2/world-data-2023.csv",
+      "format": {"type": "csv", "delimiter": ","}
+    },
+    {
+      "name": "source_0",
+      "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/VegaLite/Week9/Homework/ne_110m_admin_0_countries.topojson",
+      "format": {
+        "type": "topojson",
+        "feature": "ne_110m_admin_0_countries",
+        "parse": {}
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum[\"properties\"] && datum[\"properties\"][\"NAME\"]",
+          "as": "properties.NAME"
+        }
+      ]
+    },
+    {
+      "name": "data_0",
+      "source": "source_0",
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "'Data is not available in ' + datum.properties.NAME",
+          "as": "note"
+        }
+      ]
+    },
+    {
+      "name": "data_1",
+      "source": "source_0",
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "source_3",
+          "key": "Country",
+          "fields": ["properties.NAME"],
+          "values": ["Life expectancy", "GDP", "Population"]
+        },
+        {
+          "type": "filter",
+          "expr": "isValid(datum[\"Life expectancy\"]) && isFinite(+datum[\"Life expectancy\"])"
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "projection",
+      "size": {"signal": "[width, height]"},
+      "fit": {
+        "signal": "[data('data_0'), data('source_1'), data('source_2'), data('data_1')]"
+      },
+      "type": "equalEarth"
+    }
+  ],
+  "marks": [
+    {
+      "name": "layer_0_marks",
+      "type": "shape",
+      "style": ["geoshape"],
+      "from": {"data": "data_0"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#bdbdbd"},
+          "stroke": {"value": "black"},
+          "strokeWidth": {"value": 0.2},
+          "tooltip": {
+            "signal": "isValid(datum[\"note\"]) ? datum[\"note\"] : \"\"+datum[\"note\"]"
+          },
+          "ariaRoleDescription": {"value": "geoshape"},
+          "description": {
+            "signal": "\"note: \" + (isValid(datum[\"note\"]) ? datum[\"note\"] : \"\"+datum[\"note\"])"
+          }
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "name": "layer_1_marks",
+      "type": "shape",
+      "style": ["geoshape"],
+      "from": {"data": "source_1"},
+      "encode": {
+        "update": {
+          "fill": {"value": "#9ecae1"},
+          "stroke": {"value": "black"},
+          "strokeWidth": {"value": 0.2},
+          "ariaRoleDescription": {"value": "geoshape"}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "name": "layer_2_marks",
+      "type": "shape",
+      "style": ["geoshape"],
+      "from": {"data": "source_2"},
+      "encode": {
+        "update": {
+          "fill": {"value": null},
+          "stroke": {"value": "white"},
+          "strokeWidth": {"value": 0.5},
+          "ariaRoleDescription": {"value": "geoshape"}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "name": "layer_3_marks",
+      "type": "shape",
+      "style": ["geoshape"],
+      "from": {"data": "data_1"},
+      "encode": {
+        "update": {
+          "stroke": {"value": "black"},
+          "strokeWidth": {"value": 0.2},
+          "fill": {"scale": "color", "field": "Life expectancy"},
+          "tooltip": {
+            "signal": "{\"Country\": isValid(datum[\"properties.NAME\"]) ? datum[\"properties.NAME\"] : \"\"+datum[\"properties.NAME\"], \"Life expectancy\": format(datum[\"Life expectancy\"], \".2f\"), \"GDP($)\": format(datum[\"GDP\"], \".2f\"), \"Population\": format(datum[\"Population\"], \"\")}"
+          },
+          "ariaRoleDescription": {"value": "geoshape"},
+          "description": {
+            "signal": "\"Life expectancy: \" + (format(datum[\"Life expectancy\"], \"\")) + \"; Country: \" + (isValid(datum[\"properties.NAME\"]) ? datum[\"properties.NAME\"] : \"\"+datum[\"properties.NAME\"]) + \"; GDP($): \" + (format(datum[\"GDP\"], \".2f\")) + \"; Population: \" + (format(datum[\"Population\"], \"\"))"
+          }
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "threshold",
+      "domain": [50, 60, 70, 80],
+      "range": ["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"],
+      "interpolate": "hcl"
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "labelOverlap": "greedy",
+      "symbolType": "circle",
+      "title": "Life expectancy",
+      "encode": {"symbols": {"update": {"stroke": {"value": "black"}}}}
+    }
+  ],
+  "config": {}
+}
