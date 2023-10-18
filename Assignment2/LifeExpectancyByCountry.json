@@ -65,6 +65,7 @@
       "encoding": {
         "color": {
           "field": "Life_expectancy",
+          "title": "Life Expectancy (yrs)",
           "type": "quantitative",
           "scale": {
             "type": "threshold",
@@ -77,16 +78,16 @@
           {
             "field": "Life_expectancy",
             "type": "quantitative",
-            "title": "Life expectancy",
-            "format": ".2f"
+            "title": "Life expectancy (yrs)",
+            "format": ","
           },
           {
             "field": "GDP",
             "type": "quantitative",
             "title": "GDP($)",
-            "format": ".2f"
+            "format": ",r"
           },
-          {"field": "Population", "type": "quantitative", "title": "Population"}
+          {"field": "Population", "type": "quantitative", "title": "Population", "format": ","}
         ]
       }
     }
