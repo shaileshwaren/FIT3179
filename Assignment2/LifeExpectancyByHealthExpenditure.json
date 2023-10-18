@@ -1,0 +1,28 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/Assignment2/world-data-2023.csv"
+  },
+  "mark": {"type": "bar", "width": {"band": 0.7}},
+  "width": 700,
+  "height": 350,
+  "title": "Life Expectancy by Health Expenditure",
+  "encoding": {
+    "x": {
+      "bin": true,
+      "field": "Out of pocket health expenditure",
+      "type": "quantitative",
+      "scale": {"type": "linear", "domain": [0, 1]}
+    },
+    "y": {"aggregate": "average", "field": "Life_expectancy"},
+    "tooltip": [
+      {
+        "field": "Life_expectancy",
+        "type": "quantitative",
+        "title": "Life expectancy"
+      }
+    ],
+    "color": {"value": "#de2d26"}
+  },
+  "config": {}
+}
