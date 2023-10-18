@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Life Expectancy by Country",
+  "title": "",
   "width": 700,
   "height": 400,
   "data": {
