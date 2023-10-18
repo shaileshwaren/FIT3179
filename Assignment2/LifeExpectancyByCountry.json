@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Life Expectancy by Country",
-  "width": 800,
+  "width": 600,
   "height": 400,
   "data": {
     "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/VegaLite/Week9/Homework/ne_110m_admin_0_countries.topojson",
@@ -57,14 +57,14 @@
               "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/Assignment2/world-data-2023.csv"
             },
             "key": "Country",
-            "fields": ["Life expectancy", "GDP", "Population"]
+            "fields": ["Life_expectancy", "GDP", "Population"]
           }
         }
       ],
       "mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 0.2},
       "encoding": {
         "color": {
-          "field": "Life expectancy",
+          "field": "Life_expectancy",
           "type": "quantitative",
           "scale": {
             "type": "threshold",
@@ -75,7 +75,7 @@
         "tooltip": [
           {"field": "properties.NAME", "type": "nominal", "title": "Country"},
           {
-            "field": "Life expectancy",
+            "field": "Life_expectancy",
             "type": "quantitative",
             "title": "Life expectancy",
             "format": ".2f"
