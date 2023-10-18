@@ -2,8 +2,10 @@
 <html>
 
 <head>
-  <title>Multiple Visualisations | An Example</title>
+  <title>FIT3179 Assignment 2</title>
+  
   <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -19,105 +21,151 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
   <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+<style>
+  body:before {
+    content: "";
+    position: fixed;
+    inset: -50px;
+  }
+
+  body {
+    background: #00DFFC;
+    margin: 0;
+    min-height: 840vh;
+  }
+
+  html {
+    background: #fff;
+  }
+</style>
 
 
 </head>
 
 <body>
+  <div class="center-container">
+    <h1>Global Socioeconomic Analysis</h1>
+  </div>
 
-  <div class="page">
-
-    <!-- pure grid group -->
-    <div class="pure-g">
-      <div class="pure-u-1-1">
-        <h1>Multiple Visualisations</h1>
-        <p>This page demonstrates how you can use pure.css grid for your layout.</p>
-      </div>
+  <div class="center-container-text">
+     <div class="text-container">
+      <p>This visualization has five sections comprising of population, life expectancy, GDP, and education of countries.
+      Each section is used to analyze the country's progression or digression of that particular section. With these analysis,
+      we hope to attain insight into each country's unique features and structures influence the sections visualized below. With the
+      help of a large data set, we will explore how these factors affect and relate to one another and ulitmately giving us a 
+      thorough understanding of its global socioeconomy.
+    </p>
     </div>
-    <!-- end pure grid group -->
+  </div>
 
-    <!-- pure grid group -->
-    <div class="pure-g">
-      <div class="pure-u-1-2">
+  <div class="container-3">
+    <div class="text-container-2">
+      <div class="title-container">
+        <h2>Life Expectancy</h2>
+      </div>
+      
+      <p>A person's predicted lifespan is expressed statistically as their life expectancy, which takes into account 
+        lifestyle choices, medical breakthroughs, and other pertinent aspects. It is an important gauge of a population's 
+        general health and happiness. To evaluate the standard of living and efficiency of the healthcare systems in a particular 
+        region or nation, life expectancy is frequently employed in demographic and public health studies.
+
+      </p>
+      <p>We have two visualizations depicting the range of life expectancy from the year 2000 to year 2015 and the different types of
+        mortalities. The types of mortalities displayed comprises of adult mortality, infant deaths and under five deaths shown in different regions.
+
+
+      </p>
+    </div>
+    
+
+  <div class="container-3-1">
+      <div class="visualization">
+      <div id="vis3" class="vis-container"></div>
+    </div>
+    <div class="text">
+      <p>This ranged dot plot shows that Africa having the lowest life expectancy and North America having the highest life
+        expectancy in 2000. Asia with the highest life expectancy in 2015 shows that Asia is developing at a high rate.
+        Overall, all regions have increased their maximum life expectancy.
+      </p>
+    </div>
+
+
+
+
+  </div>
+
+  <div class="container-3-1">
+    <div class="text-2">
+      <p>This stacked bar chart shows three different mortality types per 1000. Africa is shown as the highest mortality 
+        rates every year in all categories. Positively, 
+        all regions show a decrease in expected mortality over the years. We are able to take a look at each year to see the mortality rate
+        of that particular year.
+      </p>
+    </div>
+    <div class="visualization-2">
+    <div id="vis2" class="vis-container"></div>
+  </div>
+  </div>
+</div>
+  </div>
+
+
+<div class="center-container-text">
+  <div class="title-container-last">
+    <h3>Bibliography</h3>
+  </div>
+  <div class="text-container-last">
+   <p>
+    Lasha(author), Life Expectancy (WHO) Fixed, https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated<br>
+    <br>
+    Nidula Elgiriyewithana(author), Global Country Information Dataset 2023, https://www.kaggle.com/datasets/nelgiriyewithana/countries-of-the-world-2023
+
+ </p>
+ </div>
+</div>
+
+
+
+  <!-- <div class="page"> -->
+    
+
+
+
+   <!-- end pure grid group -->
+    <!-- <div class="pure-g">
+      <div class="pure-u-1-4">
         <div class="description description-left">
-          <h2>Two Columns Layout</h2>
-          <p>The first column contains text and the second column contains a visualisation.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. </p>
+          <div id="vis2" class="vis-container"></div>
         </div>
       </div>
-      <div class="pure-u-1-2">
-        <div id="vis1" class="vis-container"></div>
+      <div class="pure-u-1-4">
+        <div id="vis3" class="vis-container"></div>
       </div>
-    </div>
-    <!-- end pure grid group -->
+    </div> -->
 
-    <!-- pure grid group -->
-    <div class="pure-g">
-      <div class="pure-u-1-3">
-        <div class="description description-left">
-          <h2>Three Equal Columns</h2>
-          <p>Using all three columns without merging. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat
-            sed. Egestas purus viverra accumsan in nisl. Egestas purus viverra accumsan in nisl.</p>
-        </div>
-      </div>
-      <div class="pure-u-1-3">
-        <div id="vis4" class="vis-container"></div>
-      </div>
-      <div class="pure-u-1-3" style="width: 31.5%;">
-        <div id="vis3" class="vis-container" style="margin-left: 15px;"></div>
-      </div>
+   
 
-    </div>
-    <!-- end pure grid group -->
-
-    <!-- pure grid group -->
-    <div class="pure-g">
-      <div class="pure-u-2-3">
-        <div id="vis2" class="vis-container"></div>
-      </div>
-      <div class="pure-u-1-3">
-        <div class="description description-right">
-          <h2>First and Second Columns Combined</h2>
-          <p>The first and second columns are combined. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa sapien
-            faucibus et molestie ac feugiat sed. Egestas purus viverra accumsan in nisl.</p>
-        </div>
-      </div>
-
-    </div>
-    <!-- end pure grid group -->
-
-    <div class="pure-g">
-      <div class="pure-u-1-1 small-font">
-        <p>This visualisation is created by <a href="https://fit3179.github.io/Vega-Lite/" target="_blank">FIT3179
-            Teaching Team</a>. The datasource is <a href="#" target=" _blank">some data repository online</href>.</p>
-      </div>
-    </div>
 
 
   </div> <!-- end page -->
 
   <script type="text/javascript">
-    var specVis1 = "LifeExpectancyByPhysicians.json";
     var specVis2 = "LifeExpectancyByPhysicians.json";
-
-    vegaEmbed('#vis1', specVis1, { "actions": false });
+    var specVis3 = "LifeExpectancyByPhysicians.json";
 
     vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
-    vegaEmbed('#vis3', specVis1, { "actions": false }).then(function (result) {
+    vegaEmbed('#vis3', specVis3, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
-    vegaEmbed('#vis4', specVis2, { "actions": false }).then(function (result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-    }).catch(console.error);
+
+
+
+
   </script>
 </body>
 
