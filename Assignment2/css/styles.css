@@ -25,7 +25,7 @@ h2 {
     z-index: 1;
 }
 
-.container-3 {
+.title-container {
     display: flex;
     flex-direction: column; /* Vertically align elements */
     align-items: center; /* Horizontally center the content */
@@ -43,7 +43,7 @@ h2 {
     border-radius: 50px;
 }
 
-.text-container-2 {
+.container-text {
     font-size: 20px;
     text-align: center;
     /* padding-top: 30px; */
@@ -55,31 +55,12 @@ h2 {
     /* margin-bottom: 30px; */
 }
 
-.title-container{
-    text-align: left;
+.heading{
+    text-align: center;
     margin-bottom: 40px;
 }
 
-  .center-container-text {
-    display: flex;
-    justify-content: center; /* Horizontally center the content */
-    align-items: center;    /* Vertically center the content */
-    height: 30vh;          /* Ensure the container covers the full viewport height */
-    position: relative;
-    z-index: 1;
-    background-color: hsla(0, 0%, 83%, 0.9);
-    width: 1000px;
-    margin: auto;
-    padding: 20px;
-    padding-top: 20px;
-    margin-top: 10px; /* Add margin to create a gap from the page container */
-    margin-bottom: 20px; /* Add margin to create a gap from the page container */
-    border-radius: 50px; /* Rounded corners, adjust the value as needed */
-  }
-
-
-
-.container-3-1 {
+.subsection {
     display: flex;
     flex-direction: column; /* Vertically align elements */
     align-items: center;
@@ -102,31 +83,35 @@ h2 {
     padding-left: 30px;
 }
 
-.text {
-    flex: 1; /* Take up remaining space on the right */
-    padding-left: 40px; /* Add some spacing between visualization and text */
-    padding-right: 20px;
-    font-size: 20px;
-}
-.visualization-2 {
-    flex: 1; /* Take up remaining space on the right */
-    padding-left: 35px; /* Add some spacing between visualization and text */
-    padding-right: 20px;
-    font-size: 20px;
-}
-.visualization-3 {
-    flex: 1; /* Take up remaining space on the right */
-    padding-left: 35px; /* Add some spacing between visualization and text */
-    padding-right: 20px;
-    font-size: 20px;
-}
-.text-2 {
-    flex: 1; /* Take up remaining space on the right */
-    padding-left: 30px;
-    font-size: 20px;
+.vis-container {
+    width: 100%;
+    /* text-align: center;
+    padding-top: 30px;
+    padding-bottom:30px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+     */
+    
 }
 
-
+.center-container-text {
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center;    /* Vertically center the content */
+    height: 30vh;          /* Ensure the container covers the full viewport height */
+    position: relative;
+    z-index: 1;
+    background-color: hsla(0, 0%, 83%, 0.9);
+    width: 1000px;
+    margin: auto;
+    padding: 20px;
+    padding-top: 20px;
+    margin-top: 10px; /* Add margin to create a gap from the page container */
+    margin-bottom: 20px; /* Add margin to create a gap from the page container */
+    border-radius: 50px; /* Rounded corners, adjust the value as needed */
+  }
 
 .text-container-last {
     font-size: 18px;
@@ -144,18 +129,49 @@ h2 {
     margin-bottom: 20px;
     padding-left: 30px;
 }
-.vis-container {
-    width: 100%;
-    /* text-align: center;
-    padding-top: 30px;
-    padding-bottom:30px;
-    padding-left: 100px;
-    padding-right: 100px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-     */
-    
+
+.text {
+    flex: 1; /* Take up remaining space on the right */
+    padding-left: 40px; /* Add some spacing between visualization and text */
+    padding-right: 20px;
+    font-size: 20px;
 }
+
+
+
+
+
+
+
+
+.visualization-2 {
+    flex: 1; /* Take up remaining space on the right */
+    padding-left: 35px; /* Add some spacing between visualization and text */
+    padding-right: 20px;
+    font-size: 20px;
+}
+.visualization-3 {
+    flex: 1; /* Take up remaining space on the right */
+    padding-left: 35px; /* Add some spacing between visualization and text */
+    padding-right: 20px;
+    font-size: 20px;
+}
+.text-2 {
+    flex: 1; /* Take up remaining space on the right */
+    padding-left: 30px;
+    font-size: 20px;
+}
+.pure-g {
+    margin-bottom: 40px;
+}
+.description-left {
+    padding-right: 20px;
+}
+
+
+
+
+
 
 .left-container{
     align-items:left;
