@@ -77,7 +77,12 @@
 
       </p>
     </div>
-    
+
+  <div class="container-3-1">
+      <div class="visualization">
+        <div id="vis1" class="vis-container"></div>
+      </div>
+  </div>
 
   <div class="container-3-1">
       <div class="visualization">
@@ -151,8 +156,11 @@
   </div> <!-- end page -->
 
   <script type="text/javascript">
+    var specVis1 = "LifeExpectancyByCountry.json";
     var specVis2 = "LifeExpectancyByPhysicians.json";
     var specVis3 = "LifeExpectancyByPhysicians.json";
+
+    vegaEmbed('#vis1', specVis1, { "actions": false });
 
     vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
