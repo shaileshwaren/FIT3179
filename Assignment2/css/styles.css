@@ -81,7 +81,7 @@ h2 {
     display: flex;
     flex-direction: column; /* Vertically align elements */
     align-items: center; /* Horizontally center the content */
-    height: 1000vh;
+    height: 500vh;
     position: relative;
     z-index: 1;
     background-color: rgba(238, 85, 85, 0.9);
@@ -97,7 +97,7 @@ h2 {
 .container-3-1 {
     display: flex;
     align-items: center;
-    height: 300vh;
+    height: 100vh;
     position: relative;
     z-index: 1;
     background-color: lightgray;
