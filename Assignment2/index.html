@@ -136,17 +136,17 @@
   </div> <!-- end page -->
 
   <script type="text/javascript">
-    var specVis1 = "LifeExpectancyByCountry.json";
-    var specVis2 = "LifeExpectancyByPhysicians.json";
-    var specVis3 = "LifeExpectancyByHealthExpenditure.json";
+    var Vis1 = "LifeExpectancyByCountry.json";
+    var Vis2 = "LifeExpectancyByPhysicians.json";
+    var Vis3 = "LifeExpectancyByHealthExpenditure.json";
 
-    vegaEmbed('#vis1', specVis1, { "actions": false });
+    vegaEmbed('#vis1', Vis1, { "actions": false });
 
-    vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
+    vegaEmbed('#vis2', Vis2, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
-    vegaEmbed('#vis3', specVis3, { "actions": false }).then(function (result) {
+    vegaEmbed('#vis3', Vis3, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
