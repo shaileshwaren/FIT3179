@@ -68,10 +68,9 @@
     </div>
 
     <div class="container-text">
-      <p>Life expectancy is a statistical indicator that indicates the typical number of years a person or population 
-        should anticipate to live according to current mortality rates It is frequently used to gauge a population's 
-        general health and lifespan and is influenced by a number of variables, including socioeconomic status, lifestyle, 
-        and access to healthcare.</p>
+      <p>We can observe that most countries in have life expectancies higher up on the age scale.
+        However, we can observe spots with lower life expectancies tend to be grouped up, such as
+        most of the African countries and South Asia.</p>
     </div>
 
     <div class="container-text">
@@ -87,10 +86,9 @@
     </div>
 
     <div class="container-text">
-      <p>Life expectancy is a statistical indicator that indicates the typical number of years a person or population 
-        should anticipate to live according to current mortality rates It is frequently used to gauge a population's 
-        general health and lifespan and is influenced by a number of variables, including socioeconomic status, lifestyle, 
-        and access to healthcare.</p>
+      <p>Healthcare plays an important role in life expectancy, and its positive correlation is
+        clearly visualized in this bubble plot. Furthermore, we also observe unemployment rate and GDP
+        affect the average life expectancy, with the former having a negative correlation and the later a positive one.</p>
     </div>
 
     <div class="container-text">
@@ -112,10 +110,23 @@
         and access to healthcare.</p>
     </div>
     
+    <div class="container-text">
+      <div class="subsection_heading">
+        <h2>Life Expectancy against Health Expenditure</h2>
+      </div>
+    </div>
+    
     <div class="subsection">
       <div class="visualization">
-        <div id="vis1" class="vis-container"></div>
+        <div id="vis4" class="vis-container"></div>
       </div>
+    </div>
+
+    <div class="container-text">
+      <p>Life expectancy is a statistical indicator that indicates the typical number of years a person or population 
+        should anticipate to live according to current mortality rates It is frequently used to gauge a population's 
+        general health and lifespan and is influenced by a number of variables, including socioeconomic status, lifestyle, 
+        and access to healthcare.</p>
     </div>
 
 <div class="center-container-text">
@@ -140,12 +151,14 @@
    <!-- end pure grid group -->
     <!-- <div class="pure-g">
       <div class="pure-u-1-4">
-        <div class="description description-left">
-          <div id="vis2" class="vis-container"></div>
-        </div>
+        <div id="vis2" class="vis-container"></div>
+      </div>
       </div>
       <div class="pure-u-1-4">
         <div id="vis3" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-4">
+        <div id="vis4" class="vis-container"></div>
       </div>
     </div> -->
 
@@ -159,6 +172,7 @@
     var Vis1 = "LifeExpectancyByCountry.json";
     var Vis2 = "LifeExpectancyByPhysicians.json";
     var Vis3 = "LifeExpectancyByMinimumWage.json";
+    var Vis4 = "LifeExpectancyByHealthExpenditure.json";
 
     vegaEmbed('#vis1', Vis1, { "actions": false });
 
@@ -167,6 +181,10 @@
     }).catch(console.error);
 
     vegaEmbed('#vis3', Vis3, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis4', Vis4, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
