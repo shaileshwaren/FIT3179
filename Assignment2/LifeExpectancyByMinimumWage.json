@@ -6,7 +6,7 @@
   "mark": "point",
   "width": 700,
   "height": 350,
-  "title": "Life Expectancy by Minimum Wage",
+  "title": "",
   "transform": [
     {"filter": "datum.Minimum_wage > 0"},
     {"filter": "datum.Life_expectancy > 0"}
@@ -35,11 +35,6 @@
         "field": "Minimum_wage",
         "type": "quantitative",
         "title": "Minimum wage ($)"
-      },
-      {
-        "field": "Life_expectancy",
-        "type": "quantitative",
-        "title": "Life expectancy(yrs)"
       }
     ],
     "color": {"value": "#de2d26"}
