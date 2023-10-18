@@ -1,0 +1,104 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 400,
+  "height": 400,
+  "title": "Life Expectancy against Physicians per 1000 People",
+  "data": {
+    "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/Assignment2/world-data-2023.csv"
+  },
+  "params": [
+    {
+      "name": "Unemployment_Above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 30,
+        "step": 0.1,
+        "name": "Minimum Unemployment Rate (%): "
+      }
+    }
+  ],
+  "transform": [{"filter": "datum.Unemployment > Unemployment_Above"}],
+  "encoding": {
+    "x": {
+      "field": "Physicians (per 1000)",
+      "type": "quantitative",
+      "axis": {"tickCount": 3},
+      "scale": {"type": "log", "domain": [0.01, 10]}
+    },
+    "y": {
+      "field": "Life_expectancy",
+      "type": "quantitative",
+      "axis": {"tickCount": 6},
+      "scale": {"type": "linear", "domain": [0, 90]}
+    }
+  },
+  "layer": [
+    {
+      "mark": "circle",
+      "encoding": {
+        "size": {
+          "field": "GDP",
+          "type": "quantitative",
+          "scale": {"type": "log", "domain": [1, 100000000000000]},
+          "legend": {"format": ".1s"}
+        },
+        "color": {
+          "field": "Unemployment",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [0.05, 0.1, 0.15, 0.2],
+            "range": ["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"]
+          }
+        },
+        "opacity": {"value": 0.6},
+        "tooltip": [
+          {"field": "Country", "type": "nominal"},
+          {"field": "Life_expectancy", "type": "quantitative", "format": ","},
+          {
+            "field": "Physicians (per 1000)",
+            "type": "quantitative",
+            "format": ","
+          },
+          {"field": "GDP", "type": "quantitative", "format": ","},
+          {"field": "Unemployment", "type": "quantitative", "format": ","}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "Country", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['Country'] == 'China' || datum['Country'] == 'Singapore' || datum['Country'] == 'Australia' || datum['Country'] == 'New Zealand' || datum['Country'] == 'Italy' || datum['Country'] == 'Yemen' ||  datum['Country'] == 'United States'",
+            "value": 1
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "Country", "type": "nominal"},
+          {"field": "Life_expectancy", "type": "quantitative", "format": ","},
+          {
+            "field": "Physicians (per 1000)",
+            "type": "quantitative",
+            "format": ","
+          },
+          {"field": "GDP", "type": "quantitative", "format": ","},
+          {"field": "Unemployment", "type": "quantitative", "format": ","}
+        ]
+      }
+    }
+  ],
+  "config": {}
+}
