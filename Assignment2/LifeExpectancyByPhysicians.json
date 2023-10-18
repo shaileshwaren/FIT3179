@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 400,
-  "height": 400,
+  "height": 200,
   "title": "Life Expectancy against Physicians per 1000 People",
   "data": {
     "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/Assignment2/world-data-2023.csv"
