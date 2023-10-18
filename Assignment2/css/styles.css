@@ -25,25 +25,6 @@ h2 {
     z-index: 1;
 }
 
-.main-container {
-    display: flex;
-    flex-direction: column; /* Vertically align elements */
-    align-items: center; /* Horizontally center the content */
-    height: 500vh;
-    position: relative;
-    z-index: 1;
-    background-color: rgb(254,224,210)
-    width: 1000px;
-    margin: auto;
-    padding-bottom:50px;
-    padding: 10px;
-    padding-top: 20px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border-radius: 50px;
-}
-
-
 .center-container {
     display: flex;
     justify-content: center; /* Horizontally center the content */
