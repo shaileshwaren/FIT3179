@@ -60,6 +60,11 @@ h2 {
     margin-bottom: 40px;
 }
 
+.subsection_heading{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .subsection {
     display: flex;
     flex-direction: column; /* Vertically align elements */
