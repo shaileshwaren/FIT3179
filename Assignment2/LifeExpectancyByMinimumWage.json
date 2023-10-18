@@ -1,0 +1,48 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/shaileshwaren/FIT3179/main/Assignment2/world-data-2023.csv"
+  },
+  "mark": "point",
+  "width": 700,
+  "height": 350,
+  "title": "Life Expectancy by Minimum Wage",
+  "transform": [
+    {"filter": "datum.Minimum_wage > 0"},
+    {"filter": "datum.Life_expectancy > 0"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "Minimum_wage",
+      "type": "quantitative",
+      "scale": {"type": "linear", "domain": [0, 14]},
+      "title": "Minimum Wage ($)"
+    },
+    "y": {
+      "field": "Life_expectancy",
+      "type": "quantitative",
+      "scale": {"type": "linear", "domain": [0, 90]},
+      "title": "Life Expectancy (yrs)"
+    },
+    "tooltip": [
+      {"field": "Country", "type": "nominal", "title": "Country"},
+      {
+        "field": "Life_expectancy",
+        "type": "quantitative",
+        "title": "Life expectancy(yrs)"
+      },
+      {
+        "field": "Minimum_wage",
+        "type": "quantitative",
+        "title": "Minimum wage ($)"
+      },
+      {
+        "field": "Life_expectancy",
+        "type": "quantitative",
+        "title": "Life expectancy(yrs)"
+      }
+    ],
+    "color": {"value": "#de2d26"}
+  },
+  "config": {}
+}
