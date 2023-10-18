@@ -97,7 +97,7 @@ h2 {
 .container-3-1 {
     display: flex;
     align-items: center;
-    height: 58vh;
+    height: 100vh;
     position: relative;
     z-index: 1;
     background-color: lightgray;
