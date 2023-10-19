@@ -6,20 +6,24 @@
   "mark": {"type": "bar", "width": {"band": 0.7}},
   "width": 700,
   "height": 350,
-  "title": "Life Expectancy by Health Expenditure",
+  "title": "",
+  "transform": [
+    {"calculate": "100*datum.Health_expenditure", "as": "expenditure"}
+    ],
   "encoding": {
     "x": {
       "bin": true,
-      "field": "Out of pocket health expenditure",
+      "field": "expenditure",
+      "title": "Out of pocket health expenditure (%)",
       "type": "quantitative",
-      "scale": {"type": "linear", "domain": [0, 1]}
+      "scale": {"type": "linear", "domain": [0, 100]}
     },
-    "y": {"aggregate": "average", "field": "Life_expectancy"},
+    "y": {"aggregate": "average", "field": "Life_expectancy", "title": "Average Life Expectancy (yrs)"},
     "tooltip": [
       {
         "field": "Life_expectancy",
         "type": "quantitative",
-        "title": "Life expectancy"
+        "title": "Average life expectancy (yrs)"
       }
     ],
     "color": {"value": "#de2d26"}
