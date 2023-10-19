@@ -1,4 +1,4 @@
-Country,GDP,Infant mortality (per 1000 births),Life_expectancy,Minimum_wage,Out of pocket health expenditure,Physicians,Population,Unemployment,Latitude,Longitude
+Country,GDP,Infant mortality (per 1000 births),Life_expectancy,Minimum_wage,Health_expenditure,Physicians,Population,Unemployment,Latitude,Longitude
 Afghanistan,19101353833.00,47.90,64.50,0.43,0.78,0.28,38041754.00,0.11,33.94,67.71
 Albania,15278077447.00,7.80,78.50,1.12,0.57,1.20,2854191.00,0.12,41.15,20.17
 Algeria,169988000000.00,20.10,76.70,0.95,0.28,1.72,43053054.00,0.12,28.03,1.66
